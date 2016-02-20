@@ -6,9 +6,11 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/kavehmz/short"
 )
 
 func main() {
+	site := short.Site{Host: "https://short.kaveh.me/"}
 	port := os.Getenv("PORT")
 
 	if port == "" {
