@@ -1,14 +1,12 @@
 {
-  "name": "go-getting-started",
-  "description": "Go Getting Started Example App",
+  "name": "shortsite",
+  "description": "URL Shortener Site",
   "keywords": [
-    "getting-started",
-    "go",
-    "sample",
-    "example"
+    "shortsite",
+    "go"
   ],
   "image": "heroku/go:1.6",
-  "mount_dir": "src/github.com/heroku/go-getting-started",
-  "website": "http://github.com/heroku/go-getting-started",
-  "repository": "http://github.com/heroku/go-getting-started"
+  "mount_dir": "src/github.com/kmzarc/shortsite",
+  "website": "http://github.com/kmzarc/shortsite",
+  "repository": "http://github.com/kmzarc/shortsite"
 }
