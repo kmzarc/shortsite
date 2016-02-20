@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	site := short.Site{Host: "https://short.kaveh.me/"}
+	site := short.Site{Host: "https://kmz-short.herokuapp.com/"}
 	port := os.Getenv("PORT")
 
 	if port == "" {
@@ -20,14 +20,4 @@ func main() {
 	http.HandleFunc("/post", site.Post)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 
-	// router := gin.New()
-	// router.Use(gin.Logger())
-	// router.LoadHTMLGlob("templates/*.tmpl.html")
-	// router.Static("/static", "static")
-	//
-	// router.GET("/", func(c *gin.Context) {
-	// 	c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	// })
-	//
-	// router.Run(":" + port)
 }
