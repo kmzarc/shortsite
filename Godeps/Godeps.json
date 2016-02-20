@@ -6,6 +6,10 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/kavehmz/short",
+			"Rev": "caff5ab4008b8e0c7f96b9ec9a03648db8f9fc43"
+		},
+		{
 			"ImportPath": "github.com/gin-gonic/gin",
 			"Comment": "v1.0rc1-110-g4cc2de6",
 			"Rev": "4cc2de6207f4128624cbdd16be30f64966c67c08"
