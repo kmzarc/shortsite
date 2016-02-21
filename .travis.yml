@@ -11,4 +11,4 @@ install:
   - sleep 2
   - . ./travis.sh
 script:
-  - echo $RES; if [ "$RES" == '{"short":"https://localhost/7", "error":""}' ];then  echo OK; else  echo "not ok"; fi
+  - if [ "$RES" == '{"short":"https://localhost/7", "error":""}' ];then  true; else echo $RES; false; fi
