@@ -15,11 +15,11 @@ func main() {
 	if os.Getenv("HOST") == "" {
 		log.Fatal("HOST must be set")
 	}
-	if os.Getenv("REDIS_URL") == "" {
+	if os.Getenv("REDISURL") == "" {
 		log.Fatal("REDIS_URL must be set")
 	}
 
-	site := short.Site{Host: os.Getenv("HOST"), RedisURL: os.Getenv("REDIS_URL")}
+	site := short.Site{Host: os.Getenv("HOST"), RedisURL: os.Getenv("REDISURL")}
 
 	http.HandleFunc("/", site.Redirect)
 	http.HandleFunc("/post", site.Post)
