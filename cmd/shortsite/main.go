@@ -9,15 +9,20 @@ import (
 )
 
 func main() {
-	site := short.Site{Host: "https://short.kaveh.me/", RedisURL: os.Getenv("REDIS_URL")}
-	port := os.Getenv("PORT")
-
-	if port == "" {
-		log.Fatal("$PORT must be set")
+	if os.Getenv("PORT") == "" {
+		log.Fatal("PORT must be set")
 	}
+	if os.Getenv("HOST") == "" {
+		log.Fatal("HOST must be set")
+	}
+	if os.Getenv("REDIS_URL") == "" {
+		log.Fatal("REDIS_URL must be set")
+	}
+
+	site := short.Site{Host: os.Getenv("HOST"), RedisURL: os.Getenv("REDIS_URL")}
 
 	http.HandleFunc("/", site.Redirect)
 	http.HandleFunc("/post", site.Post)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 
 }
