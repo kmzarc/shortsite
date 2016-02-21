@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	site := short.Site{Host: "https://kmz-short.herokuapp.com/"}
+	site := short.Site{Host: "https://short.kaveh.me/", RedisURL: os.Getenv("REDIS_URL")}
 	port := os.Getenv("PORT")
 
 	if port == "" {
