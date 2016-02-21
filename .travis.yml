@@ -9,7 +9,5 @@ install:
   - go get github.com/kavehmz/short
   - REDISURL="redis://localhost:6379/0" HOST="https://localhost/" PORT="8080" go run cmd/shortsite/main.go &
   - sleep 2
-  - export RES=$(curl --silent -X POST -H 'Content-Type: application/json' -d '{"url":"https://gmail.com"}' http://short.kaveh.me/post)
-  - echo $RES
 script:
-  - if [ "$RES" == '{"short":"https://localhost/7", "error":""}' ];then  echo OK; else  echo "not ok"; fi
+  - RES=$(curl --silent -X POST -H 'Content-Type: application/json' -d '{"url":"https://gmail.com"}' http://short.kaveh.me/post); if [ "$RES" == '{"short":"https://localhost/7", "error":""}' ];then  echo OK; else  echo "not ok"; fi
