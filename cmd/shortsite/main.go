@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net"
 	"net/http"
 	"os"
 
@@ -16,13 +17,33 @@ func main() {
 		log.Fatal("HOST must be set")
 	}
 	if os.Getenv("REDISURL") == "" {
-		log.Fatal("REDIS_URL must be set")
+		log.Fatal("REDISURL must be set")
 	}
 
 	site := short.Site{Host: os.Getenv("HOST"), RedisURL: os.Getenv("REDISURL")}
 
 	http.HandleFunc("/", site.Redirect)
 	http.HandleFunc("/post", site.Post)
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 
+	// If pool is full, connection will wait.
+	// This is just a test, this is not a good pattern to high scale sites.
+	// This only can help if http connection as a resource is cheaper
+	// than underlying resources like db connetion,...
+	maxServingClients := 2
+	maxClientsPool := make(chan bool, maxServingClients)
+
+	server := &http.Server{
+		Addr:    ":" + os.Getenv("PORT"),
+		Handler: nil,
+		ConnState: func(conn net.Conn, state http.ConnState) {
+			switch state {
+			case http.StateNew:
+				maxClientsPool <- true
+			case http.StateClosed, http.StateHijacked:
+				<-maxClientsPool
+
+			}
+		},
+	}
+	log.Fatal(server.ListenAndServe())
 }
