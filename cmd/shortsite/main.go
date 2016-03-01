@@ -25,9 +25,9 @@ func main() {
 	http.HandleFunc("/", site.Redirect)
 	http.HandleFunc("/post", site.Post)
 
-	// If pool is full, connection will wait.
-	// This is just a test, this is not a good pattern to high scale sites.
-	// This only can help if http connection as a resource is cheaper
+	// If pool is full, connections will wait.
+	// This is not a good pattern for high scale sites.
+	// This only helps if http connection as a resource is cheaper
 	// than underlying resources like db connetion,...
 	maxServingClients := 2
 	maxClientsPool := make(chan bool, maxServingClients)
